@@ -39,25 +39,70 @@ class Books extends Component {
       googleId,
       apiKey
     });
+
+    console.log("bookshelfData: ", bookshelfData);
     this.setState({ volumes: bookshelfData.items });
   }
 
+  //   <div class="card flex-row flex-wrap">
+  //   <div class="card-header border-0">
+  //       <img src="//placehold.it/200" alt="">
+  //   </div>
+  //   <div class="card-block px-2">
+  //       <h4 class="card-title">Title</h4>
+  //       <p class="card-text">Description</p>
+  //       <a href="#" class="btn btn-primary">BUTTON</a>
+  //   </div>
+  //   <div class="w-100"></div>
+  //   <div class="card-footer w-100 text-muted">
+  //       FOOTER
+  //   </div>
+  // </div>
+
+  // <div class="card">
+  //   <div class="row no-gutters">
+  //       <div class="col-auto">
+  //           <img src="//placehold.it/200" class="img-fluid" alt="">
+  //       </div>
+  //       <div class="col">
+  //           <div class="card-block px-2">
+  //               <h4 class="card-title">Title</h4>
+  //               <p class="card-text">Description</p>
+  //               <a href="#" class="btn btn-primary">BUTTON</a>
+  //           </div>
+  //       </div>
+  //   </div>
+  //   <div class="card-footer w-100 text-muted">
+  //       Footer stating cats are CUTE little animals
+  //   </div>
+  // </div>
+
   render() {
     const bookListItem = volumeInfo => (
-      <div class="card-body flex-row flex-wrap">
-        <div>
-          <img
-            src={volumeInfo.imageLinks && volumeInfo.imageLinks.smallThumbnail}
-            class="card-img-left"
-          />
-        </div>
-        <div>
-          <h5 class="card-title">{volumeInfo.title}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{volumeInfo.authors}</h6>
-          <p class="card-text">{volumeInfo.description}</p>
-          <a href={volumeInfo.infoLink} target="_blank" class="card-link">
-            Info Link
-          </a>
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-3 phn d-none d-sm-block">
+            {/* Don't show img in xs */}
+            <img
+              src={volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail}
+              class="img-fluid w-100"
+              alt={`${volumeInfo.title} book cover`}
+            />
+          </div>
+          <div class="col">
+            <div class="card-block px-2">
+              <h5 class="card-title">{volumeInfo.title}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                {volumeInfo.authors}
+              </h6>
+              <p class="card-text overflowed overflowed-ellipsis">
+                {volumeInfo.description}
+              </p>
+              <a href={volumeInfo.infoLink} target="_blank" class="card-link">
+                Info Link
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -67,6 +112,10 @@ class Books extends Component {
         {bookListItem(item.volumeInfo)}
       </li>
     ))(this.state.volumes);
+
+    const cdcs = this.state.volumes.forEach(item => {
+      console.log(item.volumeInfo.imageLinks);
+    });
 
     return (
       <Router>
