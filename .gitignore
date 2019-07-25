@@ -8,3 +8,6 @@ bundle.js
 
 # Dependency directories
 node_modules/
+
+# Top secret stuff
+.env
